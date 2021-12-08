@@ -141,7 +141,7 @@ case class MultiObjectPoseExpLogMapping[DDomain[D] <: DiscreteDomain[D]](domain:
     //computation of the log vector fields, with associated vector having shape and pose components
     val data = (for (i <- 0 to transformations.size - 1) yield {
       transformations(i)._1.pointsWithIds
-        .map(pi => ShapeAndPoseVector(transformations(i)._1(PointId(pi._2)), transformations(i)._2(PointId(pi._2))))
+        .map(pi => ShapeAndPoseVector(transformations(i)._1.apply(pi._2), transformations(i)._2.apply(pi._2)))
         .toIndexedSeq ++
         IndexedSeq(
           ShapeAndPoseVector((transformations(i)._3 - df.domain.rotationCenters(i)),
@@ -265,7 +265,7 @@ case class SinglePoseExpLogMapping[DDomain[D] <: DiscreteDomain[D]](reference: D
 
     //computation of the log vector fields, with associated vector having shape and pose components
     val data = shapeDF.pointsWithIds
-      .map(pi => ShapeAndPoseVector(shapeDF(PointId(pi._2)), poseDF(PointId(pi._2))))
+      .map(pi => ShapeAndPoseVector(shapeDF.apply(pi._2), poseDF.apply(pi._2)))
       .toIndexedSeq ++
       IndexedSeq(
         ShapeAndPoseVector(targetRotationCenter - reference.rotCenter, targetRotationCenter - reference.rotCenter)

@@ -251,7 +251,7 @@ print("saved model")
     //computation of the log vector fields, with associated vector having shape and pose components
     val data = (for (i <- 0 to transformations.size - 1) yield {
       transformations(i)._1.pointsWithIds
-        .map(pi => ShapePoseAndIntensityVector(transformations(i)._1(PointId(pi._2)), transformations(i)._2(PointId(pi._2))))
+        .map(pi => ShapePoseAndIntensityVector(transformations(i)._1.apply(pi._2), transformations(i)._2.apply(pi._2)))
         .toIndexedSeq ++
         IndexedSeq(
           ShapePoseAndIntensityVector(PointWithIntensityVectorVector[_3D](transformations(i)._3 - df.domain.rotationCenters(i),0.0),

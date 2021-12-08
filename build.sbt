@@ -25,9 +25,12 @@ lazy val root = project
       Opts.resolver.sonatypeSnapshots
   ),
     libraryDependencies ++= Seq(
-      "ch.unibas.cs.gravis" % "scalismo-native-all" % "4.0.+",
-      "ch.unibas.cs.gravis" %% "scalismo-ui" % "0.90.0"
+      "ch.unibas.cs.gravis" % "scalismo-native-all" % "4.0.0",
+      "ch.unibas.cs.gravis" %% "scalismo-ui" % "develop-644894a3f93b9c61203c6d6c85b5d4e408a33317-SNAPSHOT",
+      "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
+      "ch.qos.logback" % "logback-classic" % "1.2.3"
     ),
+    dependencyOverrides += ("ch.unibas.cs.gravis" %% "scalismo" % "develop-245655f2f7d7abb25c6624bf84d945b6bdd7bcd6-SNAPSHOT"),
 
     assemblyJarName in assembly := "dmfc-gpm.jar",
 

@@ -1,7 +1,7 @@
 package Example
 import ShapeAndPoseModels.ShapeAndPoseVector
 import scalismo.geometry.{EuclideanVector, Point3D, _3D}
-object ShapeAndPoseVector {
+object ShapeAndPoseVectors {
   def main(args: Array[String]): Unit = {
     scalismo.initialize()
     implicit val rng = scalismo.utils.Random(42)

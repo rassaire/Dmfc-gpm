@@ -123,7 +123,7 @@ object DataCollectionDomainWithPoseParameters {
         gpaDc
           .dataItems(i)
           .pointsWithIds
-          .map(pi => ShapeAndPoseVector(gpaDc.dataItems(i)(PointId(pi._2)), poseDF(PointId(pi._2))))
+          .map(pi => ShapeAndPoseVector(gpaDc.dataItems(i).apply(pi._2), poseDF.apply(pi._2)))
           .toIndexedSeq ++
           IndexedSeq(fieldInterpolated(items(i).domain.rotCenter)) ++
           IndexedSeq(fieldInterpolated(items(i).domain.neutralPoint))
@@ -285,7 +285,7 @@ object DataCollectionMultiObjects {
           df(j)._1
             .dataItems(i)
             .pointsWithIds
-            .map(pi => ShapeAndPoseVector(df(j)._1.dataItems(i)(PointId(pi._2)), df(j)._2(PointId(pi._2))))
+            .map(pi => ShapeAndPoseVector(df(j)._1.dataItems(i).apply(pi._2), df(j)._2.apply(pi._2)))
             .toIndexedSeq ++
             IndexedSeq(df(j)._3) ++
             IndexedSeq(df(j)._4)
