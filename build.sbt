@@ -6,32 +6,29 @@ import sbtassembly.AssemblyPlugin.autoImport.assemblyMergeStrategy
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "DMFC-GPM",
+    name := "DMFC-GPM-tutorial",
     version := "0.1",
     scalaVersion := "2.13.4",
 
     resolvers ++= Seq(
-      "Artima Maven Repository" at "https://repo.artima.com/releases",
-      Resolver.sonatypeRepo("snapshots")
+
+      Opts.resolver.sonatypeSnapshots,
+
+      "shapmodelling-dmi" at "https://shapemodelling.cs.unibas.ch/repo"
+
     ),
 
-    publishMavenStyle := true,
+      libraryDependencies  ++= Seq(
 
-    publishTo := Some(Resolver.file("file", new File("E:\\PhD folders\\Phd code Inetegration into Scalismo\\dmfc-published"))),
-    scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8"),
-    resolvers ++= Seq(
-      Resolver.bintrayRepo("unibas-gravis", "maven"),
-      Resolver.bintrayRepo("cibotech", "public"),
-      Opts.resolver.sonatypeSnapshots
-  ),
-    libraryDependencies ++= Seq(
-      "ch.unibas.cs.gravis" % "scalismo-native-all" % "4.0.0",
-      "ch.unibas.cs.gravis" %% "scalismo-ui" % "develop-644894a3f93b9c61203c6d6c85b5d4e408a33317-SNAPSHOT",
-      "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
-      "ch.qos.logback" % "logback-classic" % "1.2.3"
+      "ch.unibas.cs.gravis" % "scalismo-native-all" % "4.0.+",
+
+      "ch.unibas.cs.gravis" %% "scalismo-ui" % "0.90.0",
+
+      "io.github.cibotech" %% "evilplot" % "0.8.1",
+
+      "latim" %% "dmfc-gpm" % "0.1"
+
     ),
-    dependencyOverrides += ("ch.unibas.cs.gravis" %% "scalismo" % "develop-245655f2f7d7abb25c6624bf84d945b6bdd7bcd6-SNAPSHOT"),
-
     assemblyJarName in assembly := "dmfc-gpm.jar",
 
     mainClass in assembly := Some("Example.multiObjectsModels"),
